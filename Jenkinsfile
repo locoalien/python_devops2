@@ -7,6 +7,7 @@ node {
 
     dir('') {
         stage("Instalando requerimientos") {
+            sh 'pip install --upgrade pip'
 	    sh 'apk add py-pip'
 	    sh 'pip install virtualenv'
             sh 'apk add python'
