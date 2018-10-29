@@ -1,29 +1,29 @@
 node {
-    printMessage("Pipeline Start")
+    printMessage("Comenzando Pipeline")
 
     stage("Fetch Source Code") {
-        git "https://github.com/arnoldokoth/ActivityA"
+        git "https://github.com/locoalien/python_devops2"
     }
 
-    dir('Lesson5/ActivityA') {
-        stage("Install Requirements") {
+    dir('') {
+        stage("Instalando requerimientos") {
             sh 'make install'
         }
 
-        stage("Run Tests") {
+        stage("Ejecutando Tests") {
             sh 'make jenkins_test'
         }
 
-        stage("Deploy") {
+        stage("Deploy de la aplicación") {
             if (env.BRANCH_NAME == "master") {
-                printMessage("deploying master branch")
+                printMessage("Desplegando master branch")
             } else {
-                printMessage("no deployment specified for this branch")
+                printMessage("No se pudo desplegar al branch especificado")
             }
         }
     }
 
-    printMessage("Pipeline End")
+    printMessage("Fin del Pipeline")
 }
 
 def printMessage(message) {
