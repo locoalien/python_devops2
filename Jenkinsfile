@@ -7,7 +7,7 @@ node {
 
     dir('') {
         stage("Instalando requerimientos") {
-	    sh 'apt-get install python-setuptools'
+	    sh 'pip3 --version'
             sh 'apk add python'
 	    sh 'apk add make'
 	    sh 'make install'
