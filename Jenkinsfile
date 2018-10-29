@@ -1,23 +1,29 @@
-node('master') {
+node {
+    printMessage("Pipeline Start")
+
     stage("Fetch Source Code") {
-        git 'https://github.com/TrainingByPackt/Beginning-Jenkins.git'
+        git "https://github.com/arnoldokoth/ActivityA"
     }
-    
-    dir('Lesson5') {
-        printMessage('Running Pipeline')
-        stage("Testing") {
-            sh 'python test_functions.py'
+
+    dir('Lesson5/ActivityA') {
+        stage("Install Requirements") {
+            sh 'make install'
         }
-        stage("Deployment") {
-            if (env.BRANCH_NAME == 'master') {
-                printMessage('Deploying the master branch')
+
+        stage("Run Tests") {
+            sh 'make jenkins_test'
+        }
+
+        stage("Deploy") {
+            if (env.BRANCH_NAME == "master") {
+                printMessage("deploying master branch")
             } else {
-                printMessage("No deployment for branch [${env.BRANCH_NAME}]")
+                printMessage("no deployment specified for this branch")
             }
-            
         }
-        printMessage('Pipeline Complete')
     }
+
+    printMessage("Pipeline End")
 }
 
 def printMessage(message) {
