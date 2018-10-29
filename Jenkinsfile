@@ -1,13 +1,14 @@
 node {
     printMessage("Comenzando Pipeline")
 
-    stage("Fetch Source Code") {
+    stage("Obteniendo codigo fuente") {
         git "https://github.com/locoalien/python_devops2"
     }
 
     dir('') {
         stage("Instalando requerimientos") {
-            sh 'apk add make'
+            sh 'apk add virtualenv'
+	    sh 'apk add make'
 	    sh 'make install'
         }
 
