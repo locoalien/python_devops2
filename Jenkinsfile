@@ -7,7 +7,7 @@ node {
 
     dir('') {
         stage("Instalando requerimientos") {
-	    sh 'pip3 --version'
+	    sh 'pip --version'
             sh 'apk add python'
 	    sh 'apk add make'
 	    sh 'make install'
