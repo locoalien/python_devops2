@@ -7,7 +7,8 @@ node {
 
     dir('') {
         stage("Instalando requerimientos") {
-            sh 'make install'
+            sh 'apk add make'
+	    sh 'make install'
         }
 
         stage("Ejecutando Tests") {
