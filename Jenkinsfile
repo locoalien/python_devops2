@@ -7,6 +7,7 @@ node {
 
     dir('') {
         stage("Instalando requerimientos") {
+	    sh 'apk add pip'
             sh 'apk add python'
 	    sh 'apk add make'
 	    sh 'make install'
