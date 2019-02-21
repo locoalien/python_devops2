@@ -6,7 +6,7 @@ node {
     }
 
     dir('') {
-        stage("Instalando requerimientos") {
+        stage("Instalando dependencias") {
 	    sh 'apk add py-pip'
 	    sh 'pip install virtualenv'
             sh 'apk add python'
@@ -26,6 +26,12 @@ node {
             }
         }
     }
+    emailext (
+    subject: "Job '${env.JOB_NAME} ${env.BUILD_NUMBER}'",
+    body: """<p>Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME}</a></p>""",
+    to: "santiagosk80@gmailcom",
+    from: "santiagosk80@gmailcom"
+)
 
     printMessage("Fin del Pipeline")
 }
