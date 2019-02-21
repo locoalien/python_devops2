@@ -1,7 +1,8 @@
 node {
     printMessage("Comenzando Pipeline")
 
-    stage("Obteniendo codigo fuente") {
+    stages{
+       stage("Obteniendo codigo fuente") {
         git "https://github.com/locoalien/python_devops2"
     }
 
@@ -24,7 +25,9 @@ node {
             } else {
                 printMessage("No se pudo desplegar al branch especificado")
             }
-        }
+        } 
+    }
+    
         post {
         always {
             emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
