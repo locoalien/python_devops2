@@ -25,6 +25,11 @@ node {
                 printMessage("No se pudo desplegar al branch especificado")
             }
         }
+        post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
     }
 
     printMessage("Fin del Pipeline")
